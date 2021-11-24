@@ -25,4 +25,10 @@ public class MyRESTController {
         return allBooks;
     }
 
+    @GetMapping("/isAvailableBooks")
+    public List<Book>  getIsAvailableBook() {
+        List<Book> availableBooks = bookService.getIsAvailableBook();
+        return availableBooks;
+    }
+
 }

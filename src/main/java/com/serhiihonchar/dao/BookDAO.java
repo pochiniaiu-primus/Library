@@ -12,6 +12,8 @@ public interface BookDAO {
 
     public Book getBookById(int id);
 
+    public List<Book> getIsAvailableBook();
+
 //    public void deleteBookById(int id);
 
 }

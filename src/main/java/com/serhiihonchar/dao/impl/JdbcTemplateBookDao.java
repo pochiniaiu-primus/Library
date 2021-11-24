@@ -37,6 +37,13 @@ public class JdbcTemplateBookDao implements BookDAO {
         var book = jdbcTemplate.queryForObject(sql, new BookRowMapper(), id);
         return book;
     }
+
+    @Override
+    public List<Book> getIsAvailableBook() {
+        var sql = "SELECT * FROM books WHERE available = true";
+        List<Book> allBooksList = jdbcTemplate.query(sql, new BookRowMapper());
+        return allBooksList;
+    }
 //
 //    @Override
 //    public void deleteBook(int id) {

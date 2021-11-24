@@ -10,6 +10,8 @@ public interface BookService {
     public void insertBook(Book book);
 
     public Book getBookById(int id);
+
+    public List<Book> getIsAvailableBook();
 //
 //    public void deleteBook(int id);
 }
