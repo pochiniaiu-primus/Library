@@ -14,6 +14,8 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 @Configuration
+@ComponentScan(basePackages = "com.serhiihonchar")
+@EnableWebMvc
 public class MyConfig {
 
     @Bean

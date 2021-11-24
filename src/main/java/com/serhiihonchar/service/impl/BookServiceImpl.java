@@ -1,8 +1,9 @@
-package com.serhiihonchar.service;
+package com.serhiihonchar.service.impl;
 
 import com.serhiihonchar.dao.BookDAO;
 import com.serhiihonchar.entity.Book;
 
+import com.serhiihonchar.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

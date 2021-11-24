@@ -3,13 +3,13 @@ package com.serhiihonchar.entity;
 public class Book {
     private int id;
     private String name;
-    private int dateAdded;
+    private String dateAdded;
     private boolean available;
 
     public Book() {
     }
 
-    public Book(int id, String name, int dateAdded, boolean available) {
+    public Book(int id, String name, String dateAdded, boolean available) {
         this.id = id;
         this.name = name;
         this.dateAdded = dateAdded;
@@ -32,11 +32,11 @@ public class Book {
         this.name = name;
     }
 
-    public int getDateAdded() {
+    public String getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(int dateAdded) {
+    public void setDateAdded(String dateAdded) {
         this.dateAdded = dateAdded;
     }
 

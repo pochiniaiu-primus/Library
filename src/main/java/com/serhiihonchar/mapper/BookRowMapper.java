@@ -14,7 +14,7 @@ public class BookRowMapper implements RowMapper<Book> {
 
         book.setId(resultSet.getInt("id"));
         book.setName(resultSet.getString("name"));
-        book.setDateAdded(resultSet.getInt("dateadded"));
+        book.setDateAdded(resultSet.getString("dateadded"));
         book.setAvailable(resultSet.getBoolean("available"));
 
         return book;
