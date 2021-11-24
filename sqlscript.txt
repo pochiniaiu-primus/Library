@@ -1,0 +1,16 @@
+CREATE DATABASE library;
+
+CREATE TABLE books (
+  id  serial,
+  name varchar(50),
+  dateAdded date,
+  available boolean,  
+  PRIMARY KEY (id)
+) ;
+
+INSERT INTO books (name, dateAdded, available)
+VALUES
+  ('People We Meet on Vacation','2021.11.22', 'true'),
+  ('Malibu Rising', '2021.11.22', 'true'),
+  ('Beautiful World, Where Are You', '2021.11.22', 'true'),
+  ('Apples Never Fall', '2021.11.22', 'false');
