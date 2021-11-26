@@ -2,7 +2,6 @@ package com.serhiihonchar.controller;
 
 import com.serhiihonchar.entity.Book;
 import com.serhiihonchar.service.BookService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +16,12 @@ public class MyRESTController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/booksParse")
-    public String getAllBooks(Model model) {
-        model.addAttribute("allBooks", bookService.getAllBooks());
-        model.addAttribute("isAvailableBooks", bookService.getIsAvailableBook());
-
-        return "allBooks";
-    }
+//    @GetMapping("/booksParse")
+//    public String getAllBooks(Model model) {
+//        model.addAttribute("allBooks", bookService.getAllBooks());
+//        model.addAttribute("isAvailableBooks", bookService.getIsAvailableBook());
+//        return "allBooks";
+//    }
 
 
 
