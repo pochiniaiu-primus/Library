@@ -3,12 +3,18 @@ package com.serhiihonchar.configuration;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.serhiihonchar.dao.BookDAO;
 import com.serhiihonchar.dao.impl.JdbcTemplateBookDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -16,7 +22,39 @@ import java.beans.PropertyVetoException;
 @Configuration
 @ComponentScan(basePackages = "com.serhiihonchar")
 @EnableWebMvc
-public class MyConfig {
+public class MyConfig implements WebMvcConfigurer {
+
+    private final ApplicationContext applicationContext;
+
+    @Autowired
+    public MyConfig(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    public SpringResourceTemplateResolver templateResolver() {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setPrefix("/WEB-INF/view");
+        templateResolver.setSuffix(".html");
+        return templateResolver;
+    }
+
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setEnableSpringELCompiler(true);
+        return templateEngine;
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        registry.viewResolver(resolver);
+    }
+
 
     @Bean
     public DataSource dataSource() {
@@ -31,17 +69,6 @@ public class MyConfig {
         }
         return dataSource;
     }
-//@Bean
-//public DataSource dataSource() {
-//    EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-//    EmbeddedDatabase db = builder
-//            .setType(EmbeddedDatabaseType.HSQL)
-//            .addScript("classpath:table.sql")
-//            .addScript("classpath:data.sql")
-//            .build();
-//    return db;
-//}
-
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
